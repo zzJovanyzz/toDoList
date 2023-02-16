@@ -1,0 +1,127 @@
+*{
+    font-family: sans-serif;
+}
+
+#homeHeader{
+    text-align: center;
+}
+
+#itemDescription{
+    align-items: center;
+    border: solid;
+    display: none;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 5px;
+    gap: 10px;
+    padding: 10px;
+    justify-content: center;
+    width: 475px;
+
+}
+
+#labels{
+    border: solid;
+    display: flex;
+    margin: auto;
+    padding: 10px;
+    width: 425px;
+}
+
+#listName{
+    margin-bottom: 10px;
+}
+
+#mainDiv{
+    
+    background-color: white;
+    border: solid;
+    display: block;
+    margin: auto;
+    min-height: 500px;
+    padding: 10px;
+    width: 425px;
+}
+
+#newItemButton{
+    display: flex;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+#newItemDesc{
+    width: 200px;
+}
+
+#newItemForm{
+    align-items: center;
+    border: solid;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    height: 200px;
+    justify-content: center;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    width: 425px;
+}
+
+#newListButton{
+    display: flex;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+#newListForm{
+    border: solid;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    height: 200px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    width: 425px;
+    
+}
+
+#returnHome{
+    display: flex;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.formInput{
+    display: block;
+    margin: auto;
+    margin-bottom: 5px;
+    width: 100px;
+    
+}
+
+.itemDiv{
+    align-items: center;
+    border: solid;
+    cursor: pointer;
+    display: flex;
+    font-size: 24px;
+    justify-content: center;
+    margin: 10px;
+    
+}
+
+.itemDiv:hover{
+    background-color: rgb(255, 247, 0);
+}
+
+.itemInfo{
+
+    padding: 5px;
+    text-decoration: none;
+    width: 50%;
+}
+
+.label{
+    width: 50%;
+}

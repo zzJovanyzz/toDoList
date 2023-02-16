@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="homeHeader">To-Do List</h1>
+    <button id="returnHome">Home</button>
+    <button id="newListButton">Add New List</button>
+    <button id="newItemButton">Add New Item</button>
+    <div id="itemDescription"></div>
+    <div id="mainDiv"></div>
+    <form id="newListForm">
+        <label for="listName" >List Name:</label>
+        <input class="formInput" id="listName" type="text">
+        
+        <label for="listContent">List Content <br> (Separate items with a comma and no space <br> i.e. 'first,second,third')</label>
+        <input class="formInput" id="listContent" type="text" >
+        
+        <input class="formInput" id="newListSubmit" type="submit">
+    </form>
+    <form id="newItemForm">
+        <label for="newItem">Title:</label>
+        <input class="formInput" id="newItem" type="text">
+
+        
+
+        <label for="newItemDesc">Description:</label>
+        <input class="formInput" id="newItemDesc" type="text">
+
+       
+
+        <label for="newItemDue">Due:</label>
+        <input class="formInput" id="newItemDue" type="text">
+
+        
+
+        <label for="newItemPriority">Priority:</label>
+        <input class="formInput" id="newItemPriority" type="text">
+
+        <input class="formInput" id="newItemSubmit" type="submit">
+    </form>
+    <script src="main.js"></script>
+</body>
+</html>
