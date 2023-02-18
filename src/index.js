@@ -1,6 +1,7 @@
 import { populateMainDiv } from "./domChanges"
-import { addFuncToButtons } from "./buttonFunc"
+import { addFuncToButtons, addRemoveFunc } from "./buttonFunc";
 import "./styles.css";
 
-populateMainDiv()
-addFuncToButtons()
+populateMainDiv();
+addFuncToButtons();
+addRemoveFunc();

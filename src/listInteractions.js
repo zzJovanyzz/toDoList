@@ -1,26 +1,114 @@
-import { populateMainDiv } from "./domChanges";
+import { populateListInfo, populateMainDiv } from "./domChanges";
+import { lastClicked } from "./domChanges";
 
+let projectList = [
+  {
+    name: "Shopping",
+    content: [
+      {
+        title: "Milk",
+        desc: "need milk to bake cake",
+        dueDate: "01/26/24",
+        priority: "1",
+        completed: false,
+      },
+      {
+        title: "Eggs",
+        desc: "also for cake",
+        dueDate: "01/26/24",
+        priority: "1",
+        completed: false,
+      },
+    ],
+  },
+  {
+    name: "Study",
+    content: [
+      {
+        title: "Finish To Do",
+        desc: "need to finish today",
+        dueDate: "02/13/23",
+        priority: "1",
+        completed: false,
+      },
+      {
+        title: "Reading",
+        desc: "need to finish today",
+        dueDate: "02/13/23",
+        priority: "1",
+        completed: false,
+      },
+      {
+        title: "More Reading",
+        desc: "need to finish today",
+        dueDate: "02/13/23",
+        priority: "1",
+        completed: false,
+      },
+    ],
+  },
+];
 
-let projectList = [{name: "Shopping", content:[{ title: "Milk", desc: "need milk to bake cake", dueDate: "01/26/24", priority: "1", completed: false}, { title: "Eggs", desc: "also for cake", dueDate: "01/26/24", priority: "1", completed: false} ]}, 
-                   {name: "Study",    content:[{ title: "Finish To Do", desc: "need to finish today", dueDate: "02/13/23", priority: "1", completed: false}, { title: "Reading", desc: "need to finish today", dueDate: "02/13/23", priority: "1", completed: false}, { title: "More Reading", desc: "need to finish today", dueDate: "02/13/23", priority: "1", completed: false} ]}];
+let myCreateList = (name, content = []) => {
+  return { name, content };
+};
 
-let myCreateList = (name, content = []) =>{
+let myCreateObject = (
+  title,
+  desc = "",
+  dueDate = "",
+  priority = "1",
+  completed = false
+) => {
+  return { title, desc, dueDate, priority, completed };
+};
 
-    return {name, content}
-}
+let getProjectList = () => {
+  return projectList;
+};
 
-let myCreateObject = (title, desc = "", dueDate ="", priority = "1" , completed = false) =>{
+let addToProjectList = (item) => {
+  getProjectList().push(item);
+};
 
-    return {title, desc, dueDate, priority, completed}
-}
+let removeList = (name) => {
+  for (let i = 0; i < getProjectList().length; i++) {
+    if (getProjectList()[i].name == name) {
+      getProjectList().splice(i, 1);
+    }
+  }
+  populateMainDiv();
+  console.log(getProjectList());
+};
 
+let removeItem = (id) => {
+  let currentName = `${id.slice(0, -6)}`;
 
-let getProjectList = () =>{
-    return projectList
-}
+  for (let i = 0; i < getProjectList().length; i++) {
+    if (getProjectList()[i].name == `${lastClicked.slice(0, -3)}`) {
+      let currentList = getProjectList()[i];
+      console.log(currentList);
+      for (let x = 0; x < currentList.content.length; x++) {
+        if (currentList.content[x].title == currentName) {
+          console.log(`item is : ${currentList.content[x].title}`);
+          currentList.content.splice(x, 1);
+          populateListInfo(currentList);
+          document.getElementById("itemDescription").style.display = "none";
+          console.log(currentList);
+        }
+      }
+    }
+  }
 
-let addToProjectList = (item) =>{
-    getProjectList().push(item)
-}
+  // console.log(currentName);
+  // console.log(currentList)
+};
 
-export { addToProjectList, getProjectList, myCreateObject, myCreateList}
+export {
+  addToProjectList,
+  getProjectList,
+  myCreateObject,
+  myCreateList,
+  removeItem,
+  removeList,
+};

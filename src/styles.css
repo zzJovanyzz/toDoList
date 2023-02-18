@@ -103,11 +103,12 @@
 .itemDiv{
     align-items: center;
     border: solid;
+    border-radius: 10px;
     cursor: pointer;
     display: flex;
     font-size: 24px;
-    justify-content: center;
-    margin: 10px;
+    justify-content: space-between;
+        padding: 5px;
     
 }
 
@@ -115,6 +116,13 @@
     background-color: rgb(255, 247, 0);
 }
 
+.itemDivContainer {
+    border-bottom: solid;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 10px;
+}
 .itemInfo{
 
     padding: 5px;
@@ -124,4 +132,16 @@
 
 .label{
     width: 50%;
+}
+.removeItem {
+    height: 30px;
+}
+
+.toDoDivContainers {
+    align-items: center;
+    border-bottom: solid;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
 }
