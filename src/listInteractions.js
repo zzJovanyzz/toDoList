@@ -3,46 +3,46 @@ import { lastClicked } from "./domChanges";
 
 let projectList = [
   {
-    name: "Shopping",
-    content: [
-      {
-        title: "Milk",
-        desc: "need milk to bake cake",
-        dueDate: "01/26/24",
-        priority: "1",
-        completed: false,
-      },
-      {
-        title: "Eggs",
-        desc: "also for cake",
-        dueDate: "01/26/24",
-        priority: "1",
-        completed: false,
-      },
-    ],
-  },
-  {
     name: "Study",
     content: [
       {
         title: "Finish To Do",
         desc: "need to finish today",
-        dueDate: "02/13/23",
-        priority: "1",
+        dueDate: "02/13/2023",
+        priority: "High",
         completed: false,
       },
       {
         title: "Reading",
         desc: "need to finish today",
-        dueDate: "02/13/23",
-        priority: "1",
+        dueDate: "02/13/2023",
+        priority: "Medium",
         completed: false,
       },
       {
         title: "More Reading",
         desc: "need to finish today",
-        dueDate: "02/13/23",
-        priority: "1",
+        dueDate: "02/13/2023",
+        priority: "Low",
+        completed: false,
+      },
+    ],
+  },
+  {
+    name: "Shopping",
+    content: [
+      {
+        title: "Milk",
+        desc: "need milk to bake cake",
+        dueDate: "01/26/2024",
+        priority: "High",
+        completed: false,
+      },
+      {
+        title: "Eggs",
+        desc: "also for cake",
+        dueDate: "01/26/2024",
+        priority: "High",
         completed: false,
       },
     ],

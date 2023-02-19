@@ -5,6 +5,7 @@ import {
   myCreateObject,
   myCreateList,
   removeList,
+  removeItem,
 } from "./listInteractions";
 
 let lastClicked;
@@ -19,21 +20,72 @@ let addNewItem = () => {
 
   let currentList;
 
+  let myFormatDate = (dateStr) => {
+    let dateArr = dateStr.split("-");
+    let dateYear = dateArr[0];
+    let dateMonth = dateArr[1];
+    let dateDay = dateArr[2];
+
+    let formattedDate = `${dateMonth}/${dateDay}/${dateYear}`;
+
+    return formattedDate;
+  };
+
+  let setPriorityLevel = (numStr) => {
+    let priorityLevel;
+
+    if (numStr == "1") {
+      priorityLevel = "Low";
+    } else if (numStr == "2") {
+      priorityLevel = "Medium";
+    } else {
+      priorityLevel = "High";
+    }
+    return priorityLevel;
+  };
+
+  let newItemDueFormatted = myFormatDate(newItemDue);
+  let newItemPriorityFormatted = setPriorityLevel(newItemPriority);
+
   for (let i = 0; i < list.length; i++) {
     if (`${list[i].name}Div` == lastClicked) {
       currentList = list[i];
-      console.log(currentList);
     }
   }
 
-  if (newItem != "") {
-    currentList.content.push(
-      myCreateObject(newItemTitle, newItemDesc, newItemDue, newItemPriority)
-    );
+  let validObject = (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] == "") {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  if (
+    validObject([
+      newItemTitle,
+      newItemDesc,
+      newItemDueFormatted,
+      newItemPriorityFormatted,
+    ])
+  ) {
+    for (let x = 0; x < currentList.content.length; x++) {
+      if (currentList.content[x].title == newItemTitle) {
+        removeItem(`${newItemTitle}remove`);
+      }
+      currentList.content.push(
+        myCreateObject(
+          newItemTitle,
+          newItemDesc,
+          newItemDueFormatted,
+          newItemPriorityFormatted
+        )
+      );
+    }
   }
   populateListInfo(currentList);
   clearForm();
-  console.log(currentList);
 };
 
 let addNewList = () => {
@@ -48,13 +100,12 @@ let addNewList = () => {
 };
 
 let clearForm = () => {
-  document.getElementById("listName").value = "";
-  document.getElementById("newItem").value = "";
+  document.getElementById("newListForm").reset();
+  document.getElementById("newItemForm").reset();
 };
 
 let addToClicked = (id) => {
   lastClicked = id;
-  console.log(lastClicked);
 };
 
 let createListItemDiv = (item) => {
@@ -122,6 +173,16 @@ let closeDescDiv = () => {
 let populateItemDesc = (item) => {
   let completed;
 
+  let editItem = () => {
+    document.getElementById("itemDescription").innerText = "";
+    document.getElementById("itemDescription").style.display = "none";
+    document.getElementById("mainDiv").style.display = "none";
+    document.getElementById("newItemForm").style.display = "block";
+
+    document.getElementById("newItem").value = `${item.title}`;
+    document.getElementById("newItemDesc").value = `${item.desc}`;
+  };
+
   if (item.completed == true) {
     completed = "Done";
     document.getElementById(
@@ -137,12 +198,15 @@ let populateItemDesc = (item) => {
   document.getElementById("itemDescription").innerText = "";
   document.getElementById("itemDescription").style.display = "flex";
 
-  document
-    .getElementById("itemDescription")
-    .insertAdjacentHTML(
-      "beforeend",
-      `<button id="${item}CloseButton">close</button>`
-    );
+  document.getElementById("itemDescription").insertAdjacentHTML(
+    "beforeend",
+    `<div>
+    <button id="${item}Edit">Edit</button>
+    <button id="${item}CloseButton">close</button>
+    </div> 
+      `
+  );
+
   document
     .getElementById("itemDescription")
     .insertAdjacentHTML(
@@ -159,13 +223,29 @@ let populateItemDesc = (item) => {
   document
     .getElementById(`${item}CloseButton`)
     .addEventListener("click", closeDescDiv);
+
+  document.getElementById(`${item}Edit`).addEventListener("click", editItem);
 };
 
 let createToDoItemDiv = (item) => {
   let toDoDivContainer = document.createElement("div");
   let toDoDiv = document.createElement("div");
 
-  toDoDivContainer.setAttribute('class', 'toDoDivContainers')
+  let priorityColor;
+
+  if (item.priority == "High") {
+    priorityColor = "red";
+  } else if (item.priority == "Medium") {
+    priorityColor = "orange";
+  } else {
+    priorityColor = "green";
+  }
+
+  toDoDiv.style.borderColor = priorityColor;
+  toDoDiv.style.borderWidth = "3px";
+  toDoDiv.style.marginRight = "5px";
+
+  toDoDivContainer.setAttribute("class", "toDoDivContainers");
   toDoDivContainer.insertAdjacentElement("beforeend", toDoDiv);
 
   let getPopDescFunc = () => {
@@ -264,6 +344,7 @@ let pullUpListForm = () => {
 
 let pullUpItemForm = () => {
   document.getElementById("newItemButton").style.display = "none";
+  document.getElementById("itemDescription").style.display = "none";
   document.getElementById("mainDiv").style.display = "none";
   document.getElementById("newItemForm").style.display = "block";
 };
