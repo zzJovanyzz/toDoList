@@ -25,22 +25,22 @@
     </form>
     <form id="newItemForm">
         <label for="newItem">Title:</label>
-        <input class="formInput" id="newItem" type="text">
+        <input class="formInput" id="newItem" type="text" required>
 
         
 
         <label for="newItemDesc">Description:</label>
-        <input class="formInput" id="newItemDesc" type="text">
+        <input class="formInput" id="newItemDesc" type="text" required>
 
        
 
-        <label for="newItemDue">Due (MM/DD/YYYY):</label>
-        <input class="formInput" id="newItemDue" type="text">
+        <label for="newItemDue">Due:</label>
+        <input class="formInput" id="newItemDue" type="date" required>
 
         
 
-        <label for="newItemPriority">Priority:</label>
-        <input class="formInput" id="newItemPriority" type="text">
+        <label for="newItemPriority">Priority Level <br>(Low, Medium, High):</label>
+        <input class="formInput" id="newItemPriority" type="range" min="1" max="3" required>
 
         <input class="formInput" id="newItemSubmit" type="submit">
     </form>
