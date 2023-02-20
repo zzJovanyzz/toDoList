@@ -72,17 +72,17 @@ let addNewItem = () => {
   ) {
     for (let x = 0; x < currentList.content.length; x++) {
       if (currentList.content[x].title == newItemTitle) {
-        removeItem(`${newItemTitle}remove`);
+        removeItem(`${currentList.content[x].title}remove`);
       }
-      currentList.content.push(
-        myCreateObject(
-          newItemTitle,
-          newItemDesc,
-          newItemDueFormatted,
-          newItemPriorityFormatted
-        )
-      );
     }
+    currentList.content.push(
+      myCreateObject(
+        newItemTitle,
+        newItemDesc,
+        newItemDueFormatted,
+        newItemPriorityFormatted
+      )
+    );
   }
   populateListInfo(currentList);
   clearForm();

@@ -81,20 +81,20 @@ let removeList = (name) => {
   console.log(getProjectList());
 };
 
-let removeItem = (id) => {
-  let currentName = `${id.slice(0, -6)}`;
+let removeItem = (thisId) => {
+  let currentName = `${thisId.slice(0, -6)}`;
 
   for (let i = 0; i < getProjectList().length; i++) {
     if (getProjectList()[i].name == `${lastClicked.slice(0, -3)}`) {
       let currentList = getProjectList()[i];
-      console.log(currentList);
+      // console.log(currentList);
       for (let x = 0; x < currentList.content.length; x++) {
         if (currentList.content[x].title == currentName) {
-          console.log(`item is : ${currentList.content[x].title}`);
+          // console.log(`item is : ${currentList.content[x].title}`);
           currentList.content.splice(x, 1);
           populateListInfo(currentList);
           document.getElementById("itemDescription").style.display = "none";
-          console.log(currentList);
+          // console.log(currentList);
         }
       }
     }
