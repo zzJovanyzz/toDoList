@@ -1,53 +1,96 @@
 import { populateListInfo, populateMainDiv } from "./domChanges";
 import { lastClicked } from "./domChanges";
 
-let projectList = [
-  {
-    name: "Study",
-    content: [
+
+let projectList;
+
+let listModified = () => {
+  if (typeof Storage !== "undefined") {
+    // Code for localStorage/sessionStorage.
+    let arrToStore = [];
+
+    for (let i = 0; i < getProjectList().length; i++) {
+      arrToStore.push(JSON.stringify(getProjectList()[i]));
+    }
+
+    localStorage.projectList = JSON.stringify(arrToStore);
+  } else {
+    // Sorry! No Web Storage support..
+  }
+};
+
+if (typeof Storage !== "undefined") {
+  // listModified();
+  // Code for localStorage/sessionStorage.
+  if (localStorage.getItem("projectList") == null) {
+    console.log("its null");
+
+    projectList = [
       {
-        title: "Finish To Do",
-        desc: "need to finish today",
-        dueDate: "02/13/2023",
-        priority: "High",
-        completed: false,
+        name: "Study",
+        content: [
+          {
+            title: "Finish To Do",
+            desc: "need to finish today",
+            dueDate: "02/13/2023",
+            priority: "High",
+            completed: false,
+          },
+          {
+            title: "Reading",
+            desc: "need to finish today",
+            dueDate: "02/13/2023",
+            priority: "Medium",
+            completed: false,
+          },
+          {
+            title: "More Reading",
+            desc: "need to finish today",
+            dueDate: "02/13/2023",
+            priority: "Low",
+            completed: false,
+          },
+        ],
       },
       {
-        title: "Reading",
-        desc: "need to finish today",
-        dueDate: "02/13/2023",
-        priority: "Medium",
-        completed: false,
+        name: "Shopping",
+        content: [
+          {
+            title: "Milk",
+            desc: "need milk to bake cake",
+            dueDate: "01/26/2024",
+            priority: "High",
+            completed: false,
+          },
+          {
+            title: "Eggs",
+            desc: "also for cake",
+            dueDate: "01/26/2024",
+            priority: "High",
+            completed: false,
+          },
+        ],
       },
-      {
-        title: "More Reading",
-        desc: "need to finish today",
-        dueDate: "02/13/2023",
-        priority: "Low",
-        completed: false,
-      },
-    ],
-  },
-  {
-    name: "Shopping",
-    content: [
-      {
-        title: "Milk",
-        desc: "need milk to bake cake",
-        dueDate: "01/26/2024",
-        priority: "High",
-        completed: false,
-      },
-      {
-        title: "Eggs",
-        desc: "also for cake",
-        dueDate: "01/26/2024",
-        priority: "High",
-        completed: false,
-      },
-    ],
-  },
-];
+    ];
+  } else {
+    projectList = [];
+
+    // console.log(localStorage.projectList);
+    // console.log(JSON.parse(localStorage.projectList));
+
+    for (let i = 0; i < JSON.parse(localStorage.projectList).length; i++) {
+      projectList.push(JSON.parse(JSON.parse(localStorage.projectList)[i]));
+    }
+  }
+
+  console.log(projectList);
+} else {
+  // Sorry! No Web Storage support..
+}
+
+let getProjectList = () => {
+  return projectList;
+};
 
 let myCreateList = (name, content = []) => {
   return { name, content };
@@ -63,11 +106,13 @@ let myCreateObject = (
   return { title, desc, dueDate, priority, completed };
 };
 
-let getProjectList = () => {
-  return projectList;
-};
-
 let addToProjectList = (item) => {
+  for (let i = 0; i < getProjectList().length; i++) {
+    if (getProjectList()[i].name == item.name) {
+      getProjectList().splice(i, 1, item);
+      return;
+    }
+  }
   getProjectList().push(item);
 };
 
@@ -78,7 +123,7 @@ let removeList = (name) => {
     }
   }
   populateMainDiv();
-  console.log(getProjectList());
+  listModified();
 };
 
 let removeItem = (thisId) => {
@@ -87,21 +132,16 @@ let removeItem = (thisId) => {
   for (let i = 0; i < getProjectList().length; i++) {
     if (getProjectList()[i].name == `${lastClicked.slice(0, -3)}`) {
       let currentList = getProjectList()[i];
-      // console.log(currentList);
       for (let x = 0; x < currentList.content.length; x++) {
         if (currentList.content[x].title == currentName) {
-          // console.log(`item is : ${currentList.content[x].title}`);
           currentList.content.splice(x, 1);
           populateListInfo(currentList);
           document.getElementById("itemDescription").style.display = "none";
-          // console.log(currentList);
         }
       }
     }
   }
-
-  // console.log(currentName);
-  // console.log(currentList)
+  listModified();
 };
 
 export {
@@ -109,6 +149,7 @@ export {
   getProjectList,
   myCreateObject,
   myCreateList,
+  listModified,
   removeItem,
   removeList,
 };

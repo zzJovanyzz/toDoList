@@ -2,6 +2,7 @@ import { addRemoveItemFunc } from "./buttonFunc";
 import {
   addToProjectList,
   getProjectList,
+  listModified,
   myCreateObject,
   myCreateList,
   removeList,
@@ -83,9 +84,12 @@ let addNewItem = () => {
         newItemPriorityFormatted
       )
     );
+
+    addToProjectList(currentList);
   }
   populateListInfo(currentList);
   clearForm();
+  listModified();
 };
 
 let addNewList = () => {
@@ -97,6 +101,7 @@ let addNewList = () => {
 
   populateMainDiv();
   clearForm();
+  listModified();
 };
 
 let clearForm = () => {
@@ -360,6 +365,36 @@ let styleMainDiv = () => {
   document.getElementById("mainDiv").innerText = "";
 };
 
+let setDefaultDate = () => {
+  let myToday;
+
+  let thisYear = new Date().getFullYear();
+
+  let thisMonth;
+
+  if (new Date().getMonth().toString().length < 2) {
+    if (new Date().getMonth() < 9) {
+      thisMonth = `0${new Date().getMonth() + 1}`;
+    } else {
+      thisMonth = `${new Date().getMonth() + 1}`;
+    }
+  } else {
+    thisMonth = new Date().getMonth() + 1;
+  }
+
+  let thisDay;
+
+  if (new Date().getDay().toString().length > 1) {
+    thisDay = `0${new Date().getDate()}`;
+  } else {
+    thisDay = new Date().getDate();
+  }
+
+  myToday = `${thisYear}-${thisMonth}-${thisDay}`;
+
+  document.getElementById("newItemDue").setAttribute("value", `${myToday}`);
+};
+
 export {
   addNewItem,
   addNewList,
@@ -368,4 +403,5 @@ export {
   populateMainDiv,
   pullUpItemForm,
   pullUpListForm,
+  setDefaultDate,
 };
